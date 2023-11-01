@@ -12,8 +12,6 @@ app = Flask(__name__)
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-
-
 class Findings(BaseModel):
     Kidneys: str = None
     Ureters: str = None
