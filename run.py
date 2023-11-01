@@ -1,4 +1,3 @@
-from flask import Flask, request, render_template
 import requests
 import json
 import openai
@@ -6,13 +5,14 @@ import os
 import ast
 import sys
 import time
+from pydantic import BaseModel
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
-OPENAI_KEY = "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"
-openai.api_key = OPENAI_KEY
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-from pydantic import BaseModel
+
 
 class Findings(BaseModel):
     Kidneys: str = None
