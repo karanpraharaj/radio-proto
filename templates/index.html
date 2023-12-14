@@ -17,20 +17,32 @@
             height: 100%;  /* Make it take up the full viewport height */
         }
         .container {
-            max-width: 700px;
+            max-width: 50%;
         }
         h1 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            margin-top: 50px;
+            margin-bottom: 10px;
             font-family: 'Roboto', sans-serif;
         }
         textarea {
-            resize: none;
             background-color: #fff9e6;
+            /* width: 30px;  Set the width */
+            /* height: 10px;  Set the height */
         }
+
         .form-group.text-center {
             text-align: center;
         }
+        .side-by-side-sections {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .findings-section, .impression-section {
+            width: 48%;  /* Adjust as needed */
+        }
+
         input[type="submit"] {
             background-color: #007bff;
             color: white;
@@ -54,7 +66,7 @@
             <h1>Radiology findings parser</h1>
             <form method="post">
                 <div class="form-group">
-                    <textarea class="form-control" name="transcript" rows="10"></textarea>
+                    <textarea class="form-control" name="transcript" rows="3"></textarea>
                 </div>
                 <div class="form-group text-center">
                     <input type="submit" value="Submit">
@@ -62,11 +74,29 @@
             </form>
             
             {% if summary %}
-                <h2>Summary</h2>
-                <p>{{ summary|safe }}</p>
+                <h3>Transcript</h3>
+                <p>{{ transcript|safe }}</p>
+                <hr style="border: 1px solid #afafaf; margin-top: 20px; margin-bottom: 20px;"><br>
+                
+                <!-- New div for side-by-side sections -->
+                <div class="side-by-side-sections">
+                    <div class="findings-section">
+                        <h3>Findings</h3>
+                        <p>{{ summary|safe }}</p>
+                    </div>
+                    <hr style="border: 1px solid #afafaf; margin-top: 20px; margin-bottom: 20px;"><br>
+                    
+                    {% if impression %}
+                        <div class="impression-section">
+                            <h3>Impression</h3>
+                            <p>{{ impression|safe }}</p>
+                        </div>
+                    {% endif %}
+                </div>
             {% endif %}
         </div>
     </div>
+    
 
 </body>
 </html>
